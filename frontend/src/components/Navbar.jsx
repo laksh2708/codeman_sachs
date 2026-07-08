@@ -1,7 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "../styles/landing.css";
 
+
 export default function Navbar() {
+  
+    const navigate = useNavigate();
+    const handleStartMigration = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        navigate("/login");
+        return;
+    }
+
+    navigate("/dashboard");
+};
   return (
     <nav className="navbar">
 
@@ -32,14 +45,12 @@ export default function Navbar() {
 
       <div className="nav-buttons">
 
-        <Link to="/" className="signin-btn">
+        <Link to="/login" className="signin-btn">
           Sign In
         </Link>
 
-        <button className="primary-btn">
-          Start Migration
-        </button>
-
+        <button className="primary-btn" onClick={handleStartMigration}>Start Migration</button>
+        
       </div>
 
     </nav>

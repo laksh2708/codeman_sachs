@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Features from "../components/Features";
-import Woerkflow from "../components/Workflow";
+import Workflow from "../components/Workflow";
 import "../styles/landing.css";
 
 export default function Landing() {
@@ -14,7 +14,7 @@ export default function Landing() {
 
       <Features />
 
-      <Woerkflow />
+      <Workflow />
 
     </div>
   );

@@ -1,8 +1,28 @@
 import "./../styles/auth.css";
 import { Link } from "react-router-dom";
+import { login } from "../services/authService";
+import { saveToken } from "../utils/auth";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 
 export default function Login() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+        const response = await login({email,password});
+        saveToken(response.data.access_token);
+        navigate("/dashboard");
+    } catch (err) {
+        alert(err.response?.data?.detail || "Invalid Email or Password");
+    }
+};
+  
+
   return (
     <div className="auth-container">
       <div className="auth-card signup-card">
@@ -28,16 +48,20 @@ export default function Login() {
           Sign in to continue
         </p>
 
-        <form className="auth-form">
+        <form className="auth-form" onSubmit={handleLogin}>
 
           <input
-            type="email"
-            placeholder="Email Address"
-          />
+    type="email"
+    placeholder="Email Address"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+/>
 
           <input
             type="password"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <button type="submit">

@@ -1,20 +1,20 @@
 import { Link,useNavigate } from "react-router-dom";
 import "../styles/landing.css";
+import { isAuthenticated } from "../utils/auth";
 
 
 export default function Navbar() {
-  
-    const navigate = useNavigate();
-    const handleStartMigration = () => {
-    const token = localStorage.getItem("token");
 
-    if (!token) {
+    const navigate = useNavigate();
+  
+    const handleStartMigration = () => {
+    if (!isAuthenticated()) {
         navigate("/login");
         return;
     }
-
     navigate("/dashboard");
 };
+
   return (
     <nav className="navbar">
 

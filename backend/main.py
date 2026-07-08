@@ -1,7 +1,20 @@
 from fastapi import FastAPI
 
-app = FastAPI()
+from routes.auth import router as auth_router
+
+
+app = FastAPI(
+    title="CodeMan Sachs Backend",
+    version="1.0.0"
+)
+
+
+app.include_router(auth_router)
+
 
 @app.get("/")
 def root():
-    return {"message": "CodeMan Sachs API Running"}
+
+    return {
+        "message": "Backend is running successfully."
+    }

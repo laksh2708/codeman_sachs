@@ -39,7 +39,12 @@ class CodeBlock(Base):
         nullable=False
     )
 
-    code = Column(
+    original_code = Column(
+        Text,
+        nullable=False
+    )
+
+    migrated_code = Column(
         Text,
         nullable=False
     )

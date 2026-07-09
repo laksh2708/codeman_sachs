@@ -22,7 +22,7 @@ export default function EditSnippetModal({
 
     const [targetLanguage, setTargetLanguage] = useState(snippet.target_language);
 
-    const [code, setCode] = useState(snippet.code);
+    const [originalCode,setOriginalCode]=useState(snippet.original_code);
 
     const [loading, setLoading] = useState(false);
 
@@ -40,7 +40,7 @@ export default function EditSnippetModal({
 
                 target_language: targetLanguage,
 
-                code,
+                original_code: originalCode,
 
             });
 

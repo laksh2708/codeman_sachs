@@ -91,15 +91,45 @@ export default function ViewSnippetModal({
 
                 </div>
 
-                <textarea
+                <h3>
 
-                    readOnly
+Original Code
 
-                    value={snippet.code}
+</h3>
 
-                    rows={20}
+<textarea
 
-                />
+readOnly
+
+rows={12}
+
+value={snippet.original_code}
+
+/>
+
+<h3>
+
+Migrated Code
+
+</h3>
+
+<textarea
+
+readOnly
+
+rows={12}
+
+value={
+
+snippet.migrated_code
+
+||
+
+"Migration not completed."
+
+}
+
+/>
 
                 <div className="modal-footer">
 
@@ -107,7 +137,7 @@ export default function ViewSnippetModal({
 
                         onClick={() => {
 
-                            navigator.clipboard.writeText(snippet.code);
+                            navigator.clipboard.writeText(snippet.original_code);
 
                             alert("Copied!");
 

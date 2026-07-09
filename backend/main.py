@@ -11,9 +11,6 @@ app = FastAPI(
     title="CodeMan Sachs Backend",
     version="1.0.0"
 )
-app.include_router(auth_router)
-app.include_router(code_router)
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,6 +19,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(auth_router)
+app.include_router(code_router)
 
 @app.get("/")
 def root():

@@ -78,11 +78,11 @@ export default function SnippetCard({
 
           {
 
-            snippet.code.length > 180
+            snippet.original_code.length > 180
 
-              ? snippet.code.substring(0, 180) + "..."
+              ? snippet.original_code.substring(0, 180) + "..."
 
-              : snippet.code
+              : snippet.original_code
 
           }
 

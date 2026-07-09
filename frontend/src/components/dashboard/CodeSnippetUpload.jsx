@@ -5,13 +5,13 @@ export default function CodeSnippetUpload({ refreshHistory }) {
   const [title, setTitle] = useState("");
   const [language, setLanguage] = useState("Python");
   const [targetLanguage, setTargetLanguage] = useState("Java");
-  const [code, setCode] = useState("");
+  const [originalCode, setOriginalCode] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!title || !language || !targetLanguage || !code) {
+    if (!title || !language || !targetLanguage || !originalCode) {
       alert("Please fill all fields.");
       return;
     }
@@ -23,7 +23,7 @@ export default function CodeSnippetUpload({ refreshHistory }) {
         title,
         language,
         target_language: targetLanguage,
-        code,
+        original_code: originalCode,
       });
 
       alert("Snippet uploaded successfully!");
@@ -89,8 +89,8 @@ export default function CodeSnippetUpload({ refreshHistory }) {
         <textarea
           rows={18}
           placeholder="Paste your source code..."
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
+          value={originalCode}
+          onChange={(e) => setOriginalCode(e.target.value)}
         />
 
         <button

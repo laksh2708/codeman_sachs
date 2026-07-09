@@ -42,8 +42,8 @@ def create(
         title=request.title,
         language=request.language,
         target_language=request.target_language,
-        original_code=request.code
-    )
+        original_code=request.original_code
+)
 
 @router.get(
     "",

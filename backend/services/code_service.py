@@ -89,8 +89,8 @@ def update_code(
     if request.target_language is not None:
         code_block.target_language = request.target_language
 
-    if request.code is not None:
-        code_block.original_code = request.code
+    if request.original_code is not None:
+        code_block.original_code = request.original_code
 
     return update_code_block(
         db,

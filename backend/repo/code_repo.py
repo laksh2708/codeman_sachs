@@ -9,7 +9,7 @@ def create_code_block(
     title: str,
     language: str,
     target_language: str,
-    code: str
+    original_code: str
 ):
 
     code_block = CodeBlock(
@@ -17,7 +17,9 @@ def create_code_block(
         title=title,
         language=language,
         target_language=target_language,
-        code=code
+        original_code=original_code,
+        migrated_code=None,
+        status="PENDING"
     )
 
     db.add(code_block)

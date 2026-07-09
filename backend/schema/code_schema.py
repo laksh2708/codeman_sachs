@@ -1,6 +1,7 @@
 from typing import Optional
 from pydantic import BaseModel
 
+
 class CreateCodeRequest(BaseModel):
     title: str
     language: str
@@ -20,6 +21,9 @@ class CodeResponse(BaseModel):
     title: str
     language: str
     target_language: str
-    code: str
+    original_code: str
+    migrated_code: Optional[str] = None
+    status: str
+
     class Config:
         from_attributes = True

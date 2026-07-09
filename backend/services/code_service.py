@@ -17,7 +17,7 @@ def create_code(
     title: str,
     language: str,
     target_language: str,
-    code: str
+    original_code: str
 ):
 
     return create_code_block(
@@ -26,7 +26,7 @@ def create_code(
         title=title,
         language=language,
         target_language=target_language,
-        code=code
+        original_code=original_code
     )
 
 
@@ -90,7 +90,7 @@ def update_code(
         code_block.target_language = request.target_language
 
     if request.code is not None:
-        code_block.code = request.code
+        code_block.original_code = request.code
 
     return update_code_block(
         db,

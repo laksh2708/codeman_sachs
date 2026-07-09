@@ -46,7 +46,14 @@ class CodeBlock(Base):
 
     migrated_code = Column(
         Text,
-        nullable=False
+        nullable=True
+    )
+
+    status = Column(
+        String(20),
+        nullable=False,
+        default="PENDING",
+        server_default="PENDING"
     )
 
     created_at = Column(

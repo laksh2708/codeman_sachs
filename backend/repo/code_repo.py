@@ -72,3 +72,14 @@ def delete_code_block(
 
     db.delete(code_block)
     db.commit()
+
+
+def save_migration(
+    db: Session,
+    code_block: CodeBlock
+):
+
+    db.commit()
+    db.refresh(code_block)
+
+    return code_block

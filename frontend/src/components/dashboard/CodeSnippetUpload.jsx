@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createSnippet } from "../../services/codeService";
+import { startMigration } from "../../services/migrationService";
 
 export default function CodeSnippetUpload({ refreshHistory }) {
   const [title, setTitle] = useState("");
@@ -7,6 +8,14 @@ export default function CodeSnippetUpload({ refreshHistory }) {
   const [targetLanguage, setTargetLanguage] = useState("Java");
   const [originalCode, setOriginalCode] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loadingMigrate, setLoadingMigrate] = useState(false);
+
+  const clearForm = () => {
+    setTitle("");
+    setLanguage("Python");
+    setTargetLanguage("Java");
+    setOriginalCode("");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,10 +37,7 @@ export default function CodeSnippetUpload({ refreshHistory }) {
 
       alert("Snippet uploaded successfully!");
 
-      setTitle("");
-      setLanguage("Python");
-      setTargetLanguage("Java");
-      setCode("");
+      clearForm();
 
       if (refreshHistory) {
         refreshHistory();
@@ -41,6 +47,42 @@ export default function CodeSnippetUpload({ refreshHistory }) {
       alert("Failed to upload snippet.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleUploadAndMigrate = async () => {
+    if (!title || !language || !targetLanguage || !originalCode) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    try {
+      setLoadingMigrate(true);
+
+      const response = await createSnippet({
+        title,
+        language,
+        target_language: targetLanguage,
+        original_code: originalCode,
+      });
+
+      const codeId = response.data?.id;
+      if (!codeId) {
+        throw new Error("Unable to determine code ID after upload.");
+      }
+
+      await startMigration(codeId);
+      alert("Uploaded successfully and migration started.");
+      clearForm();
+
+      if (refreshHistory) {
+        refreshHistory();
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to upload and migrate snippet.");
+    } finally {
+      setLoadingMigrate(false);
     }
   };
 
@@ -93,12 +135,15 @@ export default function CodeSnippetUpload({ refreshHistory }) {
           onChange={(e) => setOriginalCode(e.target.value)}
         />
 
-        <button
-          type="submit"
-          disabled={loading}
-        >
-          {loading ? "Uploading..." : "Upload Snippet"}
-        </button>
+        <div className="form-actions">
+          <button
+            type="button"
+            disabled={loading || loadingMigrate}
+            onClick={handleUploadAndMigrate}
+          >
+            {loadingMigrate ? "Uploading & Migrating…" : "Upload & Migrate"}
+          </button>
+        </div>
 
       </form>
 

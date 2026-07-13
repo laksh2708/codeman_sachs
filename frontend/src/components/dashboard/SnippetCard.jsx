@@ -60,6 +60,15 @@ export default function SnippetCard({
 
           <p>
 
+            <strong>Status :</strong>
+            <span className={`status-pill ${snippet.status?.toLowerCase()}`}>
+              {snippet.status ?? "UNKNOWN"}
+            </span>
+
+          </p>
+
+          <p>
+
             <strong>Created :</strong>
 
             {

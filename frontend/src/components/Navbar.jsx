@@ -1,19 +1,8 @@
-import { Link,useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/landing.css";
-import { isAuthenticated } from "../utils/auth";
 
 
 export default function Navbar() {
-
-    const navigate = useNavigate();
-  
-    const handleStartMigration = () => {
-    if (!isAuthenticated()) {
-        navigate("/login");
-        return;
-    }
-    navigate("/dashboard");
-};
 
   return (
     <nav className="navbar">
@@ -31,26 +20,10 @@ export default function Navbar() {
 
       </div>
 
-      <div className="nav-links">
-
-        <a href="#features">Features</a>
-
-        <a href="#workflow">Workflow</a>
-
-        <a href="#agents">AI Agents</a>
-
-        <a href="#tech">Tech Stack</a>
-
-      </div>
-
-      <div className="nav-buttons">
-
+      <div className="nav-actions">
         <Link to="/login" className="signin-btn">
           Sign In
         </Link>
-
-        <button className="primary-btn" onClick={handleStartMigration}>Start Migration</button>
-        
       </div>
 
     </nav>

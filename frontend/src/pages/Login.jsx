@@ -4,6 +4,7 @@ import { login } from "../services/authService";
 import { saveToken } from "../utils/auth";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import api from "../services/api";
 
 
 export default function Login() {
@@ -16,6 +17,8 @@ export default function Login() {
     try {
         const response = await login({email,password});
         saveToken(response.data.access_token);
+        const user = await api.get("/auth/user");
+        localStorage.setItem("userName", user.data.name);
         navigate("/dashboard");
     } catch (err) {
         alert(err.response?.data?.detail || "Invalid Email or Password");

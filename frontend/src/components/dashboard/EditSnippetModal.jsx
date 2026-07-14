@@ -142,9 +142,9 @@ export default function EditSnippetModal({
 
                     rows={20}
 
-                    value={code}
+                    value={originalCode}
 
-                    onChange={(e) => setCode(e.target.value)}
+                    onChange={(e) => setOriginalCode(e.target.value)}
 
                 />
 

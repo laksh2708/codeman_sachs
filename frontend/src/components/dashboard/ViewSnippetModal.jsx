@@ -74,22 +74,21 @@ export default function ViewSnippetModal({
                     <button onClick={close}>✕</button>
 
                 </div>
+<div className="snippet-meta">
 
-                <div className="snippet-meta">
+    <span>
 
-                    <p>
+        Source : {snippet.language}
 
-                        <strong>Source:</strong> {snippet.language}
+    </span>
 
-                    </p>
+    <span>
 
-                    <p>
+        Target : {snippet.target_language}
 
-                        <strong>Target:</strong> {snippet.target_language}
+    </span>
 
-                    </p>
-
-                </div>
+</div>
 
                 <h3>
 
@@ -98,35 +97,22 @@ Original Code
 </h3>
 
 <textarea
-
 readOnly
-
+className="readonly-code"
 rows={12}
-
 value={snippet.original_code}
-
 />
 
-<h3>
-
-Migrated Code
-
-</h3>
+<h3>Migrated Code</h3>
 
 <textarea
-
 readOnly
-
+className="readonly-code"
 rows={12}
-
 value={
-
 snippet.migrated_code
-
 ||
-
 "Migration not completed."
-
 }
 
 />
@@ -137,7 +123,7 @@ snippet.migrated_code
 
                         onClick={() => {
 
-                            navigator.clipboard.writeText(snippet.original_code);
+                            navigator.clipboard.writeText(snippet.migrated_code);
 
                             alert("Copied!");
 

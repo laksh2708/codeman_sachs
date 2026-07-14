@@ -4,12 +4,15 @@ export default function DashboardNavbar() {
 
     const navigate = useNavigate();
 
+    const userName = localStorage.getItem("userName") || "Developer";
+
     const logout = () => {
-
+        const confirmLogout = window.confirm("Are you sure you want to logout?");
+        if (!confirmLogout) return;
         localStorage.removeItem("token");
-
-        navigate("/login");
-
+        localStorage.removeItem("userName");
+        alert("Logged out successfully.");
+        navigate("/");
     };
 
     return (
@@ -34,7 +37,8 @@ export default function DashboardNavbar() {
 
             <div className="dashboard-user">
 
-                <span>Welcome 👋</span>
+                <span>👋 Welcome,&nbsp;
+                    <strong>{userName}</strong></span>
 
                 <button
                     className="logout-btn"

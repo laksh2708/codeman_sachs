@@ -1,8 +1,4 @@
-import {
-
-    deleteSnippet,
-
-} from "../../services/codeService";
+import { deleteSnippet } from "../../services/codeService";
 
 export default function DeleteConfirmation({
 
@@ -20,7 +16,7 @@ export default function DeleteConfirmation({
 
             await deleteSnippet(snippet.id);
 
-            alert("Snippet Deleted");
+            alert("Snippet Deleted Successfully!");
 
             refreshHistory();
 
@@ -32,7 +28,7 @@ export default function DeleteConfirmation({
 
             console.error(err);
 
-            alert("Delete Failed");
+            alert("Failed to delete snippet.");
 
         }
 
@@ -45,47 +41,33 @@ export default function DeleteConfirmation({
             <div className="modal-card delete-card">
 
                 <h2>
-
-                    Delete Snippet
-
+                    ⚠ Delete Snippet
                 </h2>
 
                 <p>
-
-                    Are you sure you want to delete
-
+                    This action <strong>cannot be undone.</strong>
+                    <br />
+                    Are you sure you want to permanently delete this code snippet?
                 </p>
 
-                <h3>
-
+                <div className="delete-snippet-name">
                     {snippet.title}
-
-                </h3>
+                </div>
 
                 <div className="delete-buttons">
 
                     <button
-
-                        className="delete-btn"
-
-                        onClick={handleDelete}
-
+                        className="cancel-btn"
+                        onClick={close}
                     >
-
-                        Delete
-
+                        Cancel
                     </button>
 
                     <button
-
-                        className="cancel-btn"
-
-                        onClick={close}
-
+                        className="confirm-delete-btn"
+                        onClick={handleDelete}
                     >
-
-                        Cancel
-
+                        🗑 Delete Snippet
                     </button>
 
                 </div>
